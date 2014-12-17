@@ -1,10 +1,11 @@
-var fs = require('fs');
+var fileFilter = require('./file_filter');
 
-fs.readFile(process.argv[2], function (error, data){
+fileFilter(process.argv[2], process.argv[3], function(error, files) {
   if (error) {
-    throw error;
+    return console.error('Error occurred', error);
   }
-  var content = data.toString();
-  var numLines = content.split('\n').length - 1;
-  console.log(numLines);
+
+  files.forEach(function (file) {
+    console.log(file);
+  })
 });
